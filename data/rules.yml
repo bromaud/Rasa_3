@@ -1,0 +1,42 @@
+version: "2.0"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Activate Balance Form
+  steps:
+  - intent: check_balance
+  - action: simple_balance_form
+  - active_loop: simple_balance_form
+
+- rule: Submit balance Form
+  condition:
+  - active_loop: simple_balance_form
+  steps:
+  - action: simple_balance_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_submit
+  - action: utter_pizza_slots
+
+- rule: Interruption in Balance Form
+  condition:
+  # Condition that form is active.
+  - active_loop: simple_balance_form
+  steps:
+  # This unhappy path handles the case of an intent `bot_challenge`.
+  - intent: bot_challenge
+  - action: utter_iamabot
+  # Return to form after handling the `bot_challenge` intent
+  - action: simple_balance_form
+  - active_loop: simple_balance_form

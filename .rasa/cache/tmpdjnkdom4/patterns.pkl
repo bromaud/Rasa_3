@@ -1,0 +1,22 @@
+[
+  {
+    "name": "account_number",
+    "pattern": "[0-9]{10}"
+  },
+  {
+    "name": "name",
+    "pattern": "Alice Smith"
+  },
+  {
+    "name": "name",
+    "pattern": "Bob Bush"
+  },
+  {
+    "name": "name",
+    "pattern": "Joe Frazer"
+  },
+  {
+    "name": "phone_number",
+    "pattern": "[0-9]{10}"
+  }
+]
